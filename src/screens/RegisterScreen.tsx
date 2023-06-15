@@ -32,8 +32,8 @@ export default function RegisterScreen({ navigation }) {
     createUserByEmailAndPassword(email.value, password.value).then(r => {
       console.log(r, 'signUp success')
     }).catch(e => {
-      if (e.code === 'auth/email-already-in-use'){
-        setEmail(e => ({value: e.value, error: 'Email already in use, try signing in instead'}))
+      if (e.code === 'auth/email-already-in-use') {
+        setEmail(e => ({ value: e.value, error: 'Email already in use, try signing in instead' }))
       }
       console.error(e, 'signUpError')
     })

@@ -1,5 +1,5 @@
 import firestore from "@react-native-firebase/firestore";
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 import { usersReference } from "./firestoreRefs";
 import { Todo } from "./todoTypes";
 import { useProxy } from "valtio/utils";
@@ -10,14 +10,11 @@ import {
   todosNotCompletedMapProxy,
   userProxy,
 } from "./proxies";
-import { subscribe } from "valtio";
 import { handleClosePress } from "./TodoCreateBottomSheetUtils";
 import * as Network from "expo-network";
 import ellipsize from "ellipsize";
 
-const unsubscribe = subscribe(todosCompletedMapProxy, () =>
-  console.log("state has changed to", todosCompletedMapProxy.map.size)
-);
+
 const todoCollectionByUserId = (completed: boolean, userId: string) =>
   usersReference
     .doc(userId)
@@ -90,12 +87,6 @@ export const getServerTimeStamp = async () => {
     ? firestore.FieldValue.serverTimestamp()
     : firestoreTimestampFromDate(new Date());
 };
-
-const getAllTodosByCompletedFilter = (userId: string, completed: boolean) =>
-  todoCollectionByUserId(completed, userId)
-    .where("completed", "==", completed)
-
-    .get();
 
 export const updateTodoStatus = (
   todoId: string,

@@ -1,7 +1,5 @@
 import { StyleSheet, View } from "react-native";
 import {
-  MD3Colors,
-  MD2Colors,
   Text,
   TextInput,
   List,
@@ -9,29 +7,19 @@ import {
   Divider,
   Chip,
   Appbar,
-  FAB,
-  useTheme,
 } from "react-native-paper";
-import * as React from "react";
-import { useSafeAreaInsets } from "react-native-safe-area-context";
-
-import { theme } from "./src/core/theme";
-import { useCallback, useState } from "react";
-import { CalendarDate } from "react-native-paper-dates/lib/typescript/Date/Calendar";
+import React, { useState, useEffect } from "react";
 import {
-  DatePickerInput,
   DatePickerModal,
   TimePickerModal,
 } from "react-native-paper-dates";
 import { useProxy } from "valtio/utils";
 import {
   createFormProxy,
-  isDateInEditProxy,
   todosCompletedMapProxy,
   todosNotCompletedMapProxy,
   userProxy,
 } from "./proxies";
-import { subscribe } from "valtio";
 import {
   deleteTodoById,
   deleteTodoDate,
@@ -112,56 +100,6 @@ const styles = StyleSheet.create({
   },
 });
 
-const BOTTOM_APPBAR_HEIGHT = 80;
-const MEDIUM_FAB_HEIGHT = 56;
-
-const BottomBar = () => {
-  const { bottom } = useSafeAreaInsets();
-  const theme = useTheme();
-
-  return (
-    <Appbar
-      style={[
-        styles2.bottom,
-        {
-          height: BOTTOM_APPBAR_HEIGHT + bottom,
-          backgroundColor: theme.colors.elevation.level2,
-        },
-      ]}
-      safeAreaInsets={{ bottom }}
-    >
-      <Appbar.Action icon="archive" onPress={() => {}} />
-      <Appbar.Action icon="email" onPress={() => {}} />
-      <Appbar.Action icon="label" onPress={() => {}} />
-      <Appbar.Action icon="delete" onPress={() => {}} />
-      <FAB
-        mode="flat"
-        size="medium"
-        icon="plus"
-        onPress={() => {}}
-        style={[
-          styles2.fab,
-          { top: (BOTTOM_APPBAR_HEIGHT - MEDIUM_FAB_HEIGHT) / 2 },
-        ]}
-      />
-    </Appbar>
-  );
-};
-
-const styles2 = StyleSheet.create({
-  bottom: {
-    backgroundColor: "aquamarine",
-    position: "absolute",
-    left: 0,
-    right: 0,
-    bottom: 0,
-  },
-  fab: {
-    position: "absolute",
-    right: 16,
-  },
-});
-
 export const TodoDetailDates = ({
   edit,
 }: {
@@ -172,7 +110,7 @@ export const TodoDetailDates = ({
   const formState = useProxy(createFormProxy);
   const userProxyState = useProxy(userProxy);
 
-  React.useEffect(() => {
+  useEffect(() => {
     return () => {
       formState.title = "";
       formState.time = { hours: undefined, minutes: undefined };
@@ -409,7 +347,6 @@ export const TodoDetail = ({ route, navigation }) => {
                 route.params.completed
               );
             }}
-            style={styles.button}
           >
             Delete
           </Button>
@@ -425,7 +362,7 @@ export const TodoDetail = ({ route, navigation }) => {
                 userProxyState.user.uid
               );
             }}
-            style={styles.button}
+
           >
             Mark as {!route.params.completed ? "completed" : "not-completed"}
           </Button>

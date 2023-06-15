@@ -1,16 +1,12 @@
 import {
-  Platform,
   SafeAreaView,
   ScrollView,
   StyleSheet,
-  Text,
-  View,
 } from "react-native";
 import * as SplashScreen from "expo-splash-screen";
 import React, { useCallback, useEffect, useState } from "react";
 import {
   PaperProvider,
-  MD3DarkTheme,
   AnimatedFAB,
   Snackbar,
   Appbar,
@@ -19,11 +15,10 @@ import { useValtioFirestore } from "./useFirestore";
 import { NavigationContainer } from "@react-navigation/native";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import {
-  createUserByEmailAndPassword,
   useFirebaseAuth,
 } from "./useFirebaseAuth";
 import { App2 } from "./AuthC";
-import { TodoAccordionList, TodoAccordionListIds } from "./TodoAccordionList";
+import { TodoAccordionListIds } from "./TodoAccordionList";
 import { BottomSheetModalProvider } from "@gorhom/bottom-sheet";
 import { TodoCreateModal } from "./TodoCreateModal";
 import { handlePresentPress } from "./TodoCreateBottomSheetUtils";
@@ -44,13 +39,10 @@ const styles = StyleSheet.create({
   },
 });
 
+const signOut = () => auth().signOut();
 function HomeScreen() {
   const [isExtended, setIsExtended] = React.useState(true);
   const _ = useValtioFirestore();
-  const _handleMore = () =>
-    auth()
-      .signOut()
-      .then(() => console.log("User signed out22!"));
 
   const onScroll = ({ nativeEvent }) => {
     const currentScrollPosition =
@@ -63,7 +55,7 @@ function HomeScreen() {
     <>
       <Appbar.Header mode="center-aligned">
         <Appbar.Content title="Todos" />
-        <Appbar.Action icon="logout" onPress={_handleMore} />
+        <Appbar.Action icon="logout" onPress={signOut} />
       </Appbar.Header>
       <ScrollView onScroll={onScroll} style={styles.container}>
         <TodoAccordionListIds />

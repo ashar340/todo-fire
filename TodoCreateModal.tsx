@@ -1,12 +1,10 @@
 import React, {
-  createRef,
   useCallback,
   useEffect,
   useMemo,
-  useRef,
   useState,
 } from "react";
-import { View, StyleSheet, Alert } from "react-native";
+import { View } from "react-native";
 import {
   BottomSheetModal,
   BottomSheetBackdrop,
@@ -18,14 +16,13 @@ import { TodoDetailDates } from "./TodoDetail";
 import { createFormProxy, currentlyCreatingIdProxy, userProxy } from "./proxies";
 import { useProxy } from "valtio/utils";
 import {
-  createTodoTemp,
   createTodoWithId,
   firestoreAutoId,
   firestoreTimestampFromDate,
   getServerTimeStamp,
 } from "./useFirestore";
 
-const createTodo = async (setTitleError, note) => {
+const createTodo = async (setTitleError, note: string) => {
   if (createFormProxy.title === "") {
     setTitleError(true);
     return;
@@ -39,9 +36,7 @@ const createTodo = async (setTitleError, note) => {
 
   if (createFormProxy.time.hours && createFormProxy.time.minutes) {
     const d = createFormProxy.date;
-    // d.setHours(createFormProxy.time.hours, createFormProxy.time.minutes);
     insertObj["due_at"] = firestoreTimestampFromDate(d);
-
     insertObj["due_at_hours"] = createFormProxy.time.hours;
     insertObj["due_at_minutes"] = createFormProxy.time.minutes;
   } else if (createFormProxy.date !== undefined) {
@@ -122,22 +117,12 @@ const TodoCreateForm = () => {
 };
 
 export const TodoCreateModal = () => {
-  // state
   const [backdropPressBehavior, setBackdropPressBehavior] = useState<
     "none" | "close" | "collapse"
   >("close");
 
-  // variables
   const snapPoints = useMemo(() => ["85%", "85%"], []);
 
-  //#region callbacks
-  const handleDismiss = useCallback(() => {
-    // Alert.alert("Modal Been Dismissed");
-  }, []);
-
-  //#endregion
-
-  // renders
   const renderBackdrop = useCallback(
     (props: BottomSheetBackdropProps) => (
       <BottomSheetBackdrop {...props} pressBehavior={backdropPressBehavior} />
@@ -149,17 +134,9 @@ export const TodoCreateModal = () => {
     <BottomSheetModal
       ref={todoCreateBottomSheetRef}
       snapPoints={snapPoints}
-      onDismiss={handleDismiss}
       backdropComponent={renderBackdrop}
     >
       <TodoCreateForm />
     </BottomSheetModal>
   );
 };
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    padding: 24,
-  },
-});
