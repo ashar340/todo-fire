@@ -53,7 +53,7 @@ function HomeScreen() {
 
   return (
     <>
-      <Appbar.Header mode="center-aligned">
+      <Appbar.Header statusBarHeight={0} mode="center-aligned">
         <Appbar.Content title="Todos" />
         <Appbar.Action icon="logout" onPress={signOut} />
       </Appbar.Header>

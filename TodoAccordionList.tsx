@@ -40,7 +40,6 @@ const TodoListItemId = ({
   const formProxyState = useProxy(createFormProxy);
   const userProxyState = useProxy(userProxy);
 
-
   const todo = completed
     ? completedMap.map.get(id)
     : notCompletedMap.map.get(id);
@@ -93,7 +92,11 @@ const AccordionListIds = ({
     <List.Accordion
       onPress={handlePress}
       expanded={expanded}
-      title={completed ? "Completed" : "Not-Completed"}
+      title={
+        completed
+          ? `Completed (${todos.length})`
+          : `Not-Completed (${todos.length})`
+      }
       left={(props) => (
         <List.Icon
           {...props}
