@@ -16,6 +16,8 @@ todo-fire is a **realtime & offline-first**, todo mobile app for android and iOS
 It syncs data in realtime across multiple devices, so you can "jump" between devices
 without worrying about syncing.<br />
 
+Syncing is enabled through gRPC remote procedure calls and bi-directional streaming over the database connection under the hood
+
 todo-fire is made with high availability and high consistency, It's made possible to achieve both through the underlying Spanner DB [see paper...][spanner-paper]
   
 todo-fire has authentication built-in through firebase email-password method. 
@@ -38,7 +40,7 @@ todo-fire has authentication built-in through firebase email-password method.
 
 todo-fire can be installed as follows:
 
-1. **Development Environtment Setup**
+1. **Development Environment Setup**
 
    You will require your environment setup for mobile development(skip if already done),
    please [setup instructions][react-native-env].
@@ -47,7 +49,7 @@ todo-fire can be installed as follows:
 
    To start using todo-fire and build it locally:
 
-   Run the following command to install the app and link dependencies
+   Run the following command to install the app and link dependencies from root directory
 
     ```shell
     > npm install
@@ -57,6 +59,7 @@ todo-fire can be installed as follows:
     > npm run ios
     ```
     
+    For Android: populate `sdk.dir` in /android/local.properties (create file) to contain Android SDK path (https://stackoverflow.com/a/43626724/14795040)
     ```shell
     > npm run android
     ```
