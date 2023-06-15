@@ -1,0 +1,46 @@
+{
+  "project_info": {
+    "project_number": "675938641410",
+    "project_id": "thunkable-todo-6412a",
+    "storage_bucket": "thunkable-todo-6412a.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:675938641410:android:90f66127ae13e43861a91b",
+        "android_client_info": {
+          "package_name": "com.ananyas237.thunkabletodo"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "675938641410-puhbdf29j7dqe63ck0q8a14pf3n8hodg.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAF7_nkzRO3fEi2ov0JXUMSFxv__7koJ4s"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "675938641410-puhbdf29j7dqe63ck0q8a14pf3n8hodg.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "675938641410-r0je32ff8lk97gmrf7a5436h0t2j53jj.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.ananyas237.thunkabletodo"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
