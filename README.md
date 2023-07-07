@@ -36,6 +36,9 @@ todo-fire has authentication built-in through firebase email-password method.
 2. Highly Consistent - When online, this is acheieved by real-time syncing eliminating eventual consistency
 3. Fault Tolerant - Writes are appended to firestore's commit log on disk and not lost if the app crashes or device runs out of power
 
+## Demo
+https://drive.google.com/drive/folders/1g0J_0Anij7LxkeuT5JrmIaMfV3t9TzGL?usp=sharing
+
 ## Installation
 
 todo-fire can be installed as follows:
